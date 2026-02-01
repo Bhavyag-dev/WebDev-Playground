@@ -1,0 +1,22 @@
+internal and external packages
+chalk
+dependencies
+depndency hell
+node modules heavy
+u do not push dependencies to github if u do it its bad 
+how chlk version gets updated automatically through cROT ^
+package lock what it is 
+version locking
+
+
+inClass
+difference between async and promises
+what is node js
+async wait
+promises then, catch, resolve,
+sinlge threaded meaning in js &highly scaleable
+features of node js, architecture
+
+
+
+

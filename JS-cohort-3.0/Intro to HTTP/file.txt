@@ -1,0 +1,15 @@
+ping 
+how to change the point ip address
+taught how we can buy our own server
+installed git bash for windows
+
+
+CRUD
+learned about Requests
+get put post delete, patch
+json
+download postman
+scrolled twitter in between cause it was mostly theory
+checking and making notes
+routes on the website
+started backend for an TODO app (http)
