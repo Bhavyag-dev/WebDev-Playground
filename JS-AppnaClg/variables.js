@@ -1,3 +1,4 @@
+// Student object
 const student = {
   fullName: "Bhavya Goyal",
   age: 20,
