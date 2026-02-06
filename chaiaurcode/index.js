@@ -1,20 +1,19 @@
+// Basic Express server with multiple routes
+
 const express = require('express')
 const app = express()
 const port = 4000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// Home route
+app.get('/', (req, res) => res.send('Hello World!'))
 
-app.get('/twitter', (req, res) => {
-  res.send('bhavyaztwt')
-})
+// Twitter route
+app.get('/twitter', (req, res) => res.send('bhavyaztwt'))
 
-app.get('/login', (req, res)=> {
-  res.send('<h1> login at bhavyaztwt</h1>')
-})
+// Login route
+app.get('/login', (req, res) => res.send('<h1>Login at bhavyaztwt</h1>'))
 
+// Start server
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Server running on port ${port}`)
 })
- 
