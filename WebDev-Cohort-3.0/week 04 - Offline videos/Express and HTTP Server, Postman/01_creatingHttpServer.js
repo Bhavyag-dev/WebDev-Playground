@@ -2,7 +2,9 @@
 const express = require('express');
 
 // create an express application using express function
-const app = express();
+//you always need to create an instance of express to use its features
+const app = express(); 
+
 
 // create a route for the root URL 
 app.get("/", function(req, res) {
