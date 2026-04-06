@@ -22,13 +22,17 @@ const app = express();
 // Middleware to parse JSON data in the request body
 app.use(express.json());
 
-
-const users = [{
-  name: "bhavya",
-  kidneys: [{
-    healthy: false
-  }]
-}];
+// Array to store users data
+const users = [
+  {
+    name: "bhavya",
+    kidneys: [
+      {
+        healthy: false,
+      },
+    ],
+  },
+];
 
 /**
  * Create a route handler for GET request
@@ -36,22 +40,40 @@ const users = [{
  *
  *
  */
-app.get("/", function(req, res){
+
+app.get("/", function (req, res) {
+  // get the kidneys of the first user in the users array
   const johnKidneys = users[0].kidneys;
   const numberOfKidneys = johnKidneys.length;
-  let numberOfHealthyKidneys = 0;
-  for (let i = 0; i<johnKidneys.length; i++) {
-    if (johnKidneys[i].healthy) {
-      numberOfHealthyKidneys = numberOfHealthyKidneys + 1; 
+
+  /*
+    // create a variable numberOfHealthyKidneys and set it to 0 to store the number of healthy kidneys
+    const numberOfHealthyKidneys = 0;
+
+    // loop through the kidneys of the first user in the users array
+    for (let i = 0; i < numberOfKidneys; i++) {
+        // if the kidney is healthy, increment the numberOfHealthyKidneys variable
+        if (johnKidneys[i].healthy) {
+            numberOfHealthyKidneys++;
+        }
     }
-  }
-  const numberOfUnHealthyKidneys = numberOfKidneys - numberOfHealthyKidneys;
+    */
+
+  // calculate the number of healthy kidneys using filter method and store it in numberOfHealthyKidneys variable
+  const numberOfHealthyKidneys = johnKidneys.filter(
+    (kidney) => kidney.healthy,
+  ).length;
+
+  //calculate the number of unhealthy kidneys
+  const numberOfUnhealthyKidneys = numberOfKidneys - numberOfHealthyKidneys;
+
+  // send the response in JSON format with the number of kidneys, number of healthy kidneys and number of unhealthy kidney
   res.json({
     numberOfKidneys,
     numberOfHealthyKidneys,
-    numberOfUnHealthyKidneys
-  })
-})
+    numberOfUnhealthyKidneys,
+  });
+});
 
 /**
  * Create a route handler for POST request
@@ -65,11 +87,13 @@ app.get("/", function(req, res){
  * Add a new kidney for the user with the health status provided in the request body
  */
 
-app.post("/", function(req, res) {
+app.post("/", function (req, res) {
+  // get the isHealthy value from the request body and store it in isHealthy variable
   const isHealthy = req.body.isHealthy;
-      // add a new kidney to the first user in the users array with the isHealthy value from the request body
+
+  // add a new kidney to the first user in the users array with the isHealthy value from the request body
   users[0].kidneys.push({
-    healthy:isHealthy,
+    healthy: isHealthy,
   });
 
   // send the response in JSON format with a message that the "kidney added successfully
@@ -85,15 +109,23 @@ app.post("/", function(req, res) {
  * Update all the unhealthy kidney to healthy kidney, if there are no unhealthy kidney then return a 411 status code
  */
 
-app.put("./", function (req, res) {
-  for (let i=0; i<users[0].kidneys.length; i++) {
-    user[0].kidneys[i].healthy = true;
-  }
+app.put("/", function (req, res) {
+  // check if there is atleast one unhealthy kidney, then update all the unhealthy kidneys to healthy
+  if (isThereAtleastOneUnhealthyKidney()) {
+    // loop through the kidneys of the first user in the users array and set the healthy value of the kidney to true
+    for (let i = 0; i < users[0].kidneys.length; i++) {
+      users[0].kidneys[i].healthy = true;
+    }
 
-  res.json({
-    message: "Kidney replaced successfully",
-  });
-})
+    res.json({
+      message: "Kidney replaced successfully",
+    });
+  } else {
+    res.status(411).json({
+      message: "You have no unhealthy kidney to replace",
+    });
+  }
+});
 
 /**
  * Create a route handler for DELETE request
@@ -102,8 +134,35 @@ app.put("./", function (req, res) {
  * Remove all the unhealthy kidney, if there are no unhealthy kidney then return a 411 status code
  */
 
-app.delete("./", function(req, res){
-  
-})
+app.delete("/", function (req, res) {
+  // check if there is atleast one unhealthy kidney, then remove all the unhealthy kidneys
+  if (isThereAtleastOneUnhealthyKidney()) {
+    // create a new array to store the healthy kidneys
+    const newKidneys = [];
 
-app.listen(3000);  
+    // loop through the kidneys of the first user in the users array and add the healthy kidneys to the new array
+    for (let i = 0; i < users[0].kidneys.length; i++) {
+      if (users[0].kidneys[i].healthy) {
+        newKidneys.push({
+          healthy: true,
+        });
+      }
+    }
+    
+    // update the kidneys of the first user in the users array with the new array of kidneys
+    users[0].kidneys = newKidneys;
+    
+    // send the response in JSON format with a message that the "unhealthy kidney is removed successfully"
+    res.json({
+      message: "Unhealthy Kidney Removed Successfully!",
+    });
+  
+  } else {
+    res.status(411).json({
+      message: "You have no unhealthy kidneys to remove",
+    });
+  }
+});
+
+// Start the server on port 3000
+app.listen(3000);
