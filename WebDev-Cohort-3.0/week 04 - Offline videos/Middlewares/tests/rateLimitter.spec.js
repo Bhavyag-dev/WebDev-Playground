@@ -27,18 +27,20 @@ app.use(function (req, res, next) {
     // get the user id from the headers of the request object and store it in userId variable
     const userId = req.headers["user-id"];
 
-    // initialize the user count if this is their first request in the current 1 second window
-    if (!numberOfRequestsForUser[userId]) {
-        numberOfRequestsForUser[userId] = 0;
-    }
-
-    // increment the number of requests made by the user by 1
-    numberOfRequestsForUser[userId]++;
-
-    // block the user if they make more than 5 requests in a single second
+    // check if the user id is present in the numberOfRequestsForUser object and the number of requests made by the user is greater than 5 in a single second 
     if (numberOfRequestsForUser[userId] > 5) {
-        res.status(404).send("No Entry!");
+        // increment the number of requests made by the user by 1
+        numberOfRequestsForUser[userId]++;
+
+        // check if the number of requests made by the user is greater than 5 in a single second then send a 404 status code with message "No Entry!" as response to the user
+        if(numberOfRequestsForUser[userId] > 5) {
+            res.status(404).send("No Entry!");
+        } else {
+            next(); // call the next middleware function in the stack
+        }
     } else {
+        // increment the number of requests made by the user by 1 and call the next middleware function in the stack
+        numberOfRequestsForUser[userId] = 1;
         next();
     }
 });
