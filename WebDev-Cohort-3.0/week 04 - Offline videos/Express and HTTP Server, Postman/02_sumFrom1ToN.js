@@ -6,7 +6,7 @@ const app = express();
 
 // create a function to calculate the sum of numbers from 1 to n
 function sumFrom1ToN(n) {
-    // return n * (n + 1) / 2;
+     // return n * (n + 1) / 2;
 
     // initialize sum variable to store the sum of numbers from 1 to n
     let sum = 0;
@@ -46,4 +46,4 @@ app.get("/", function(req, res) {
 });
 
 // Start the server on port 3000
-app.listen(3000);
+app.listen(8080);
