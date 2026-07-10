@@ -5,6 +5,7 @@ let student = {
   isPass: true,
 };
 
+// for-in is mainly used to loop through object keys.
 for (let key in student) {
   console.log("key =", key, "value =", student[key]);
 }

@@ -1,3 +1,4 @@
+// A simple object stores related values together.
 const product = {
   productName: "Ball pen",
   rating: 4,
@@ -7,6 +8,7 @@ const product = {
 
 console.log(product);
 
+// Another object example, similar to a social media profile.
 const profile = {
   userName: "Bhavya",
   isFollow: true,

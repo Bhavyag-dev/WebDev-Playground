@@ -9,6 +9,7 @@ console.log(product.productName);
 
 let num = 10;
 
+// The remainder operator helps us check even and odd numbers.
 if (num % 2 === 0) {
   console.log(num, "is even");
 } else {
@@ -18,6 +19,7 @@ if (num % 2 === 0) {
 let score = 76;
 let grade;
 
+// This if-else ladder checks the score range and assigns a grade.
 if (score >= 90) {
   grade = "A";
 } else if (score >= 70) {
