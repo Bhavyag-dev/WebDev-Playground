@@ -3,13 +3,9 @@ const student = {
   age: 20,
   cgpa: 9.0,
   isPass: true,
-}
+};
 
-student.age += 1
-console.log(student.age)
+console.log(student.fullName);
 
-/*
-typeof "Hello"  // "string"
-typeof 123      // "number"
-typeof true     // "boolean"
-*/
+student.age = student.age + 1;
+console.log(student.age);
