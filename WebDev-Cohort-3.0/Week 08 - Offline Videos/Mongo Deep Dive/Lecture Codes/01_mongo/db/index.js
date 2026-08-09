@@ -1,8 +1,18 @@
+const path = require("node:path");
+
+// Load the ignored local environment file before connecting to MongoDB.
+process.loadEnvFile(path.join(__dirname, "..", ".env"));
+
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+    throw new Error("Missing required environment variable: MONGO_URI");
+}
+
 // Import mongoose module for connecting to MongoDB
 const mongoose = require("mongoose");
 
 // Connect to MongoDB 
-mongoose.connect("mongodb+srv://100xdevs:WvaTca0509mb90YX@cluster0.ossjd.mongodb.net/course_selling_app")
+mongoose.connect(MONGO_URI)
     .then(() => {
         console.log("Connected to MongoDB");
     })
