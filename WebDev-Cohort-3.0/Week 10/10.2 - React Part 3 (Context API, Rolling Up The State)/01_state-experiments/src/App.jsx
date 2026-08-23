@@ -1,122 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// Import useState hook from react
+import { useState } from "react";
 
+// Create a function component named App that serves as the main application component
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    // Return the JSX for the component
+    return (
+        // Wrap the LightBulb component inside a div
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+            {/* Render the LightBulb component */}
+            <LightBulb />
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    );
 }
 
-export default App
+// Create a function component named LightBulb to manage the state of the bulb
+function LightBulb() {
+    // Declare a state variable bulbOn and a function setBulbOn to update the state
+    const [bulbOn, setBulbOn] = useState(true);
+
+    // Return the JSX for the component
+    return (
+        // Wrap the BulbState and ToggleBulbState components inside a div
+        <div>
+            {/* Render the BulbState component with the bulbOn state as a prop */}
+            <BulbState bulbOn={bulbOn} />
+
+            {/* Render the ToggleBulbState component with the bulbOn state and setBulbOn function as props */}
+            <ToggleBulbState bulbOn={bulbOn} setBulbOn={setBulbOn} />
+        </div>
+    );
+}
+
+// Create a function component named BulbState to display the state of the bulb
+function BulbState({ bulbOn }) {
+    // Return the JSX for the component
+    return (
+        // Display the state of the bulb based on the value of the bulbOn prop using a ternary operator
+        <div>{bulbOn ? "Bulb is on" : "Bulb is off"}</div>
+    );
+}
+
+// Create a function component named ToggleBulbState to toggle the state of the bulb
+function ToggleBulbState({ bulbOn, setBulbOn }) {
+    // Function to toggle the state of the bulb
+    function toggleBulb() {
+        // Update the state of the bulb using the setBulbOn function
+        // setBulbOn((currentState) => !currentState);
+
+        // Update the state of the bulb using the setBulbOn function 
+        setBulbOn(!bulbOn);
+    }
+
+    // Return the JSX for the component
+    return (
+        // Button to toggle the state of the bulb on click
+        <div>
+            {/* Add an onClick event listener to the button that calls the toggleBulb function */}
+            <button onClick={toggleBulb}>Toggle the Bulb</button>
+        </div>
+    );
+}
+
+// Export the App component as the default export to be used in other files or components
+export default App;
